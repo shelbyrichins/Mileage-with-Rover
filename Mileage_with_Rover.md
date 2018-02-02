@@ -1,10 +1,9 @@
----
-title: "My Mileage with Rover"
-output: github_document
----
+My Mileage with Rover
+================
+
 Data collected and compiled by Shelby Richins
 
-```{r Load Data}
+``` r
 setwd('C:/Users/Shelby/Desktop/EDA/Rover')
 
 library(ggplot2)
@@ -13,30 +12,59 @@ library(scales)
 
 df = read.csv('Rover_mileage.csv')
 ```
-## Total Mileage
+
+Total Mileage
+-------------
+
 From 2017/09/09 to 2018/01/26
-```{r}
+
+``` r
 sum(df$Mileage)
 ```
+
+    ## [1] 1245
+
 ### Mileage by Service Type
-```{r}
+
+``` r
 by(df$Mileage, df$Service, sum)
 ```
 
+    ## df$Service: Day Care
+    ## [1] 54
+    ## -------------------------------------------------------- 
+    ## df$Service: Drop In 
+    ## [1] 96
+    ## -------------------------------------------------------- 
+    ## df$Service: House Sitting
+    ## [1] 558
+    ## -------------------------------------------------------- 
+    ## df$Service: Meet and Greet
+    ## [1] 146
+    ## -------------------------------------------------------- 
+    ## df$Service: Walk
+    ## [1] 391
 
-```{r}
+``` r
 # boxplots of mileage by service type
 ggplot(aes(y = Mileage, x = Service), data = df) +
   geom_boxplot() +
   theme_minimal()
 ```
 
-## Fuel Costs 
+![](Mileage_with_Rover_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-```{r}
+Fuel Costs
+----------
+
+``` r
 # Total cost of fuel
 sum(df$Cost)
+```
 
+    ## [1] 155.2308
+
+``` r
 # histogram of cost by service type
 ggplot(aes(x = Cost), data = df) +
   geom_histogram(binwidth = 0.5) +
@@ -45,9 +73,12 @@ ggplot(aes(x = Cost), data = df) +
   facet_wrap(~Service, scales = 'free_y', ncol = 3)
 ```
 
-## Mileage through Time 
+![](Mileage_with_Rover_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-```{r}
+Mileage through Time
+--------------------
+
+``` r
 # format date column
 df$Date_formatted <- strptime(df$Date, format = '%m/%d/%Y')
 # order by date
@@ -66,9 +97,13 @@ ggplot(aes(x = Date_formatted, y = cumsum(Mileage)), data = df) +
   theme_minimal()
 ```
 
+![](Mileage_with_Rover_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
 ### Cumulative Mileage by Service Type
+
 Large amount of Mileage gained doing walks in November 2017 and while House Sitting in January 2018
-```{r}
+
+``` r
 # calculate cummulative sum by service type
 df$csum <- ave(df$Mileage, df$Service, FUN=cumsum)
 
@@ -81,3 +116,4 @@ ggplot(aes(x = Date_formatted, y = csum, color = Service), data = df) +
   theme_minimal() 
 ```
 
+![](Mileage_with_Rover_files/figure-markdown_github/unnamed-chunk-6-1.png)
