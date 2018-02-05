@@ -67,7 +67,7 @@ sum(df$Cost)
 ``` r
 # histogram of cost by service type
 ggplot(aes(x = Cost), data = df) +
-  geom_histogram(binwidth = 0.5) +
+  geom_histogram(binwidth = 0.40) +
   theme_minimal() +
   scale_x_continuous(labels = dollar_format(prefix="$")) +
   facet_wrap(~Service, scales = 'free_y', ncol = 3)
