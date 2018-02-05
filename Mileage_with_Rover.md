@@ -22,7 +22,7 @@ From 2017/09/09 to 2018/01/26
 sum(df$Mileage)
 ```
 
-    ## [1] 1245
+    ## [1] 1403
 
 ### Mileage by Service Type
 
@@ -31,19 +31,19 @@ by(df$Mileage, df$Service, sum)
 ```
 
     ## df$Service: Day Care
-    ## [1] 54
+    ## [1] 60
     ## -------------------------------------------------------- 
     ## df$Service: Drop In 
-    ## [1] 96
+    ## [1] 106
     ## -------------------------------------------------------- 
     ## df$Service: House Sitting
-    ## [1] 558
+    ## [1] 642
     ## -------------------------------------------------------- 
     ## df$Service: Meet and Greet
-    ## [1] 146
+    ## [1] 168
     ## -------------------------------------------------------- 
     ## df$Service: Walk
-    ## [1] 391
+    ## [1] 427
 
 ``` r
 # boxplots of mileage by service type
@@ -62,7 +62,7 @@ Fuel Costs
 sum(df$Cost)
 ```
 
-    ## [1] 155.2308
+    ## [1] 175.3676
 
 ``` r
 # histogram of cost by service type
